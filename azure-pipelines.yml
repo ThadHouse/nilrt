@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+resources:
+  containers:
+  - container: ubuntu16
+    image: ubuntu:16.04
+    options: "--name ci-container -v /usr/bin/docker:/tmp/docker:ro"
+
+trigger:
+- frc2019
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+container: ubuntu16
+
+steps:
+  - script: |
+      /tmp/docker exec -t -u 0 ci-container \
+      sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
+    displayName: Set up sudo
+  - script: |
+      sudo apt-get update -y
+      sudo apt-get install build-essentials python3 cmake git -y
+    displayName: Install Packages
+  - script: |
+      MACHINE=xilinx-zynq DISTRO=nilrt ./nibb.sh config
+      . env-nilrt-xilinx-zynq
+      bitbake mono
+    displayName: Build
