@@ -24,7 +24,7 @@ steps:
     displayName: Set up sudo
   - script: |
       sudo apt-get update -y
-      sudo apt-get install build-essentials python3 cmake git -y
+      sudo apt-get install build-essential python3 cmake git -y
     displayName: Install Packages
   - script: |
       MACHINE=xilinx-zynq DISTRO=nilrt ./nibb.sh config
