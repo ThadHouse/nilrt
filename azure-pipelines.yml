@@ -27,7 +27,7 @@ steps:
       sudo apt-get install build-essential python3 cmake git -y
     displayName: Install Packages
   - script: |
-      MACHINE=xilinx-zynq DISTRO=nilrt ./nibb.sh config
+      MACHINE=xilinx-zynq DISTRO=nilrt THREADS=3 ./nibb.sh config
       . env-nilrt-xilinx-zynq
       bitbake mono
     displayName: Build
