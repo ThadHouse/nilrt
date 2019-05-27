@@ -24,9 +24,12 @@ steps:
     displayName: Set up sudo
   - script: |
       sudo apt-get update -y
-      sudo apt-get install build-essential python3 cmake git -y
+      sudo apt-get install build-essential python3 cmake locales git -y
     displayName: Install Packages
   - script: |
+      export LC_ALL=en_US.UTF-8
+      export LANG=en_US.UTF-8
+      export LANGUAGE=en_US.UTF-8
       MACHINE=xilinx-zynq DISTRO=nilrt THREADS=3 ./nibb.sh config
       . env-nilrt-xilinx-zynq
       bitbake mono
