@@ -24,7 +24,7 @@ steps:
     displayName: Set up sudo
   - script: |
       sudo apt-get update -y
-      sudo apt-get install cpio wget ping chrpath diffstat gawk texinfo build-essential python cmake locales git -y
+      sudo apt-get install cpio wget iputils-ping chrpath diffstat gawk texinfo build-essential python cmake locales git -y
       sudo locale-gen en_US.UTF-8
       sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
     displayName: Install Packages
