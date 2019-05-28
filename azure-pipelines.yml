@@ -12,27 +12,32 @@ resources:
 trigger:
 - frc2019
 
-pool:
-  vmImage: 'ubuntu-latest'
 
-container: ubuntu16
+jobs:
+- job: "Primary"
+  pool:
+    vmImage: 'ubuntu-latest'
 
-steps:
-  - script: |
-      /tmp/docker exec -t -u 0 ci-container \
-      sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
-    displayName: Set up sudo
-  - script: |
-      sudo apt-get update -y
-      sudo apt-get install cpio wget iputils-ping chrpath diffstat gawk texinfo build-essential python python3 cmake locales git -y
-      sudo locale-gen en_US.UTF-8
-      sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
-    displayName: Install Packages
-  - script: |
-      export LC_ALL=en_US.UTF-8
-      export LANG=en_US.UTF-8
-      export LANGUAGE=en_US.UTF-8
-      MACHINE=xilinx-zynq DISTRO=nilrt THREADS=3 ./nibb.sh config
-      . env-nilrt-xilinx-zynq
-      bitbake mono
-    displayName: Build
+  timeoutInMinutes: 0
+
+  container: ubuntu16
+
+  steps:
+    - script: |
+        /tmp/docker exec -t -u 0 ci-container \
+        sh -c "apt-get update && DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confold" -y install sudo"
+      displayName: Set up sudo
+    - script: |
+        sudo apt-get update -y
+        sudo apt-get install cpio wget iputils-ping chrpath diffstat gawk texinfo build-essential python python3 cmake locales git -y
+        sudo locale-gen en_US.UTF-8
+        sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+      displayName: Install Packages
+    - script: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        export LANGUAGE=en_US.UTF-8
+        MACHINE=xilinx-zynq DISTRO=nilrt THREADS=3 ./nibb.sh config
+        . env-nilrt-xilinx-zynq
+        bitbake mono
+      displayName: Build
