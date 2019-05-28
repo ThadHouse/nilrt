@@ -25,7 +25,6 @@ steps:
   - script: |
       sudo apt-get update -y
       sudo apt-get install build-essential python3 cmake locales git -y
-      sudo dpkg-reconfigure locales
       sudo locale-gen en_US.UTF-8
       sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
     displayName: Install Packages
