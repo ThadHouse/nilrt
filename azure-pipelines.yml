@@ -41,3 +41,7 @@ jobs:
         . env-nilrt-xilinx-zynq
         bitbake mono
       displayName: Build
+    - task: PublishPipelineArtifact@0
+      inputs:
+        artifactName: 'IPKs'
+        targetPath: 'build/tmp_nilrt_3_0_xilinx-zynq-glibc/deploy'
