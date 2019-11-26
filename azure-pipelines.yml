@@ -11,6 +11,7 @@ resources:
 
 trigger:
 - frc2019
+- frc2020
 
 
 jobs:
