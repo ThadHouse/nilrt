@@ -5,8 +5,8 @@
 
 resources:
   containers:
-  - container: ubuntu16
-    image: ubuntu:16.04
+  - container: ubuntu18
+    image: ubuntu:18.04
     options: "--name ci-container -v /usr/bin/docker:/tmp/docker:ro"
 
 trigger:
@@ -21,7 +21,7 @@ jobs:
 
   timeoutInMinutes: 0
 
-  container: ubuntu16
+  container: ubuntu18
 
   steps:
     - script: |
