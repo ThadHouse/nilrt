@@ -39,10 +39,14 @@ jobs:
         export LANG=en_US.UTF-8
         export LANGUAGE=en_US.UTF-8
         MACHINE=xilinx-zynq DISTRO=nilrt THREADS=3 ./nibb.sh config
+      displayName: Configure Setup
+    - script: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        export LANGUAGE=en_US.UTF-8
         . env-nilrt-xilinx-zynq
         bitbake mono
-        bitbake libgfortran
-      displayName: Build
+      displayName: Build Mono
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'IPKs'
