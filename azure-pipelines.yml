@@ -41,6 +41,7 @@ jobs:
         MACHINE=xilinx-zynq DISTRO=nilrt THREADS=3 ./nibb.sh config
         . env-nilrt-xilinx-zynq
         bitbake mono
+        bitbake libgfortran
       displayName: Build
     - task: PublishPipelineArtifact@0
       inputs:
