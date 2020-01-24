@@ -47,6 +47,13 @@ jobs:
         . env-nilrt-xilinx-zynq
         bitbake mono
       displayName: Build Mono
+    - script: |
+        export LC_ALL=en_US.UTF-8
+        export LANG=en_US.UTF-8
+        export LANGUAGE=en_US.UTF-8
+        . env-nilrt-xilinx-zynq
+        bitbake libgfortran
+      displayName: Build fortran
     - task: PublishPipelineArtifact@0
       inputs:
         artifactName: 'IPKs'
